@@ -45,8 +45,36 @@ db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
 
 server.route({
     method: "GET",
-    path: "/hello",
+    path: "/code/{product_code}",
     handler: (req, res) => {
-        return("hellow world!");
+        return(encodeURIComponent(req.params.product_code));
+    }
+});
+server.route({
+    method: "GET",
+    path: "/name/{product_name}",
+    handler: (req, res) => {
+        return(encodeURIComponent(req.params.product_name));
+    }
+});
+server.route({
+    method: "GET",
+    path: "/products",
+    handler: (req, res) => {
+        return("Find all the products");
+    }
+});
+server.route({
+    method: "POST",
+    path: "/product",
+    handler: (req, res) => {
+        return("Add this new product to database:\n" + req.payload);
+    }
+});
+server.route({
+    method: "PATCH",
+    path: "/{product_code}",
+    handler: (req, res) => {
+        return("Edit the product with product id: "+encodeURIComponent(req.params.product_code));
     }
 });
