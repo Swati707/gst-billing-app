@@ -1,0 +1,23 @@
+{
+  "name": "ps-drive-2018-gst-app",
+  "version": "1.0.0",
+  "description": "Its a GST billing system assignment given by Placement Season.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swati707/ps-drive-2018-gst-app.git"
+  },
+  "author": "Swati Kanchan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swati707/ps-drive-2018-gst-app/issues"
+  },
+  "homepage": "https://github.com/Swati707/ps-drive-2018-gst-app#readme",
+  "dependencies": {
+    "hapi": "^17.2.1",
+    "mysql": "^2.15.0"
+  }
+}
