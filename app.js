@@ -2,7 +2,10 @@ const Hapi = require('hapi');
 const mysql = require('mysql');
 
 // server connection();
-const server = new Hapi.Server({
+const server = new Hapi.Server();
+
+//Connecting the server
+server.connection({
     host: "localhost",
     port: 3000,
     routes: {
@@ -10,71 +13,43 @@ const server = new Hapi.Server({
     }
 });
 
-//Start the server
-async function startServer() {
-    try {
-        await server.start();
-    }
-    catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
-    console.log('Server running at:', server.info.uri);
-};
-startServer();
-
 //connect to mysql server
-var db = mysql.createConnection({
+server.app.db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: '',
     database: "ps_gst_billing_task"
 });
-
-db.connect((err) => {
+server.app.db.connect((err) => {
     if(err){
         console.log("Error while connecting to mysql");
         process.exit(1);
     }
     console.log("Connected to mysql.");
 });
+const db = server.app.db;
+
+//Load plugins and start server
+server.register([  
+    require('./backend/routes/product')
+    ], (err) => {
+        if (err) {
+            console.log("Error while loading plugin");
+            throw err;
+        }
+        server.start((err) => {
+        if (err) {
+            console.log("Error while strating server");
+            throw err;
+        }
+        console.log(`Server running at: ${server.info.uri}`);
+        });
+});
+
+//Checking if database is working
 db.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
     if (error) throw error;
     console.log('The solution is: ', results[0].solution);
 });
 
-server.route({
-    method: "GET",
-    path: "/code/{product_code}",
-    handler: (req, res) => {
-        return(encodeURIComponent(req.params.product_code));
-    }
-});
-server.route({
-    method: "GET",
-    path: "/name/{product_name}",
-    handler: (req, res) => {
-        return(encodeURIComponent(req.params.product_name));
-    }
-});
-server.route({
-    method: "GET",
-    path: "/products",
-    handler: (req, res) => {
-        return("Find all the products");
-    }
-});
-server.route({
-    method: "POST",
-    path: "/product",
-    handler: (req, res) => {
-        return("Add this new product to database:\n" + req.payload);
-    }
-});
-server.route({
-    method: "PATCH",
-    path: "/{product_code}",
-    handler: (req, res) => {
-        return("Edit the product with product id: "+encodeURIComponent(req.params.product_code));
-    }
-});
+
