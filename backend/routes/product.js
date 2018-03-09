@@ -100,17 +100,17 @@ exports.register = function(server, options, next) {
         config: {
             validate: {
                 payload: {
-                    product_name: Joi.string(),
                     product_code: Joi.string(),
+                    product_name: Joi.string(),
                     product_price: Joi.number().integer(),
-                    product_gst: Joi.number().integer()
+                    product_gst: Joi.number()
                 }
             }
         }
     });
     server.route({
         method: "POST",
-        path: "/{product_code}",
+        path: "/edit/{product_code}",
         handler: (req, res) => {
             const product_code = encodeURIComponent(req.params.product_code);
             const product_price = encodeURIComponent(req.payload.product_price);
@@ -122,7 +122,7 @@ exports.register = function(server, options, next) {
                     console.log("Error while querying");
                     throw error;
                 }
-                console.log("Result from query function", result);
+                console.log("Result from Update query function", result);
                 res(result);
             });
         },
@@ -132,7 +132,7 @@ exports.register = function(server, options, next) {
                 payload: {
                     product_code: Joi.string(),
                     product_price: Joi.number().integer(),
-                    product_gst: Joi.number().integer()
+                    product_gst: Joi.number()
                 }
             }
         }

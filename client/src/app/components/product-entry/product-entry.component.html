@@ -1,0 +1,35 @@
+<ul>
+  <li *ngFor = "let product of product_list">
+    {{product.product_name}}
+  </li>
+</ul>
+<p-header>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-3">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-product-hunt"></i></span>
+          <input type="text" pInputText placeholder="Product Code">         
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-shopping-basket"></i></span>
+          <input type="text" pInputText placeholder="Product Name">         
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon"><i class="fa fa-rupee-sign"></i></span>
+          <input type="text" pInputText placeholder="Price">   
+          <span class="ui-inputgroup-addon">.00</span>      
+      </div>
+    </div>
+    <div class="ui-g-12 ui-md-3">
+      <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">GST</span>
+          <input type="text" pInputText placeholder="GST">   
+          <span class="ui-inputgroup-addon">%</span>      
+      </div>
+    </div>
+  </div>
+</p-header>
