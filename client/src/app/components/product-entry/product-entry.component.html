@@ -1,35 +1,91 @@
-<ul>
-  <li *ngFor = "let product of product_list">
-    {{product.product_name}}
-  </li>
-</ul>
-<p-header>
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-3">
-      <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-product-hunt"></i></span>
-          <input type="text" pInputText placeholder="Product Code">         
-      </div>
-    </div>
-    <div class="ui-g-12 ui-md-3">
-      <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-shopping-basket"></i></span>
-          <input type="text" pInputText placeholder="Product Name">         
-      </div>
-    </div>
-    <div class="ui-g-12 ui-md-3">
-      <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon"><i class="fa fa-rupee-sign"></i></span>
-          <input type="text" pInputText placeholder="Price">   
-          <span class="ui-inputgroup-addon">.00</span>      
-      </div>
-    </div>
-    <div class="ui-g-12 ui-md-3">
-      <div class="ui-inputgroup">
-          <span class="ui-inputgroup-addon">GST</span>
-          <input type="text" pInputText placeholder="GST">   
-          <span class="ui-inputgroup-addon">%</span>      
-      </div>
-    </div>
-  </div>
-</p-header>
+<p-dataView #dv [value]="product_list" [paginator]="true" [rows]="15" paginatorPosition="both" filterBy="product_code, product_name">
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-g">
+                <div class="ui-g-3 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-product-hunt"></i></span>
+                        <input type="text" pInputText placeholder="Product Code" pKeyFilter="alphanum"
+                        pTooltip="Enter Product Code" tooltipEvent="focus" style="margin-left:.5em"
+                        tooltipPosition="bottom">         
+                    </div>                
+                </div>
+                <div class="ui-g-3 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" pInputText placeholder="Name"
+                        pTooltip="Enter Product Name" tooltipEvent="focus" style="margin-left:.5em"
+                        tooltipPosition="bottom">         
+                    </div>
+                </div>
+                <div class="ui-g-3 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">Rs.</span>
+                        <input type="text" pInputText placeholder="Price" pKeyFilter="pint"
+                        pTooltip="Enter Price" tooltipEvent="focus" style="margin-left:.5em"
+                        tooltipPosition="bottom">   
+                        <span class="ui-inputgroup-addon">.00</span>      
+                    </div>                
+                </div>
+                <div class="ui-g-3 ui-md-3">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">GST</span>
+                        <input type="text" pInputText placeholder="GST" [pKeyFilter]="reg_exp_gst"
+                        pTooltip="Enter GST percentage" tooltipEvent="focus" style="margin-left:.5em"
+                        tooltipPosition="bottom">   
+                        <span class="ui-inputgroup-addon">%</span>  
+                    </div> 
+                </div>
+            </div>
+            <div style="text-align: center">
+                <button pButton type="button" label="Add New Product" icon="fa-plus" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-success"></button>
+            </div>
+        </div>
+    </p-header>
+    <ng-template let-product pTemplate="listItem">
+        <div class="ui-g" style="padding: 2em;border-bottom: 1px solid #dcf4a8">
+            <div class="ui-g-12 ui-md-3" style="text-align:center">
+                <img src="assets/demo.jpg">
+            </div>
+            <div class="ui-g-12 ui-md-8 car-details">
+                <div class="ui-g">
+                    <div class="ui-g-2 ui-sm-6">Product code: </div>
+                    <div class="ui-g-10 ui-sm-6">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" pInputText disabled="true"> 
+                            <label for="float-input">{{product.product_code}}</label>
+                        </span>
+                    </div>
+                    
+                    <div class="ui-g-2 ui-sm-6">Product Name: </div>
+                    <div class="ui-g-10 ui-sm-6">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_name"
+                            pTooltip="Enter Product Name" tooltipEvent="focus" tooltipPosition="bottom"> 
+                        </span>
+                    </div>
+                    
+                    <div class="ui-g-2 ui-sm-6">Price: </div>
+                    <div class="ui-g-10 ui-sm-6">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_price"
+                            pTooltip="Enter Product Price" tooltipEvent="focus" tooltipPosition="bottom"> 
+                        </span>
+                    </div>
+                    
+                    <div class="ui-g-2 ui-sm-6">GST: </div>
+                    <div class="ui-g-10 ui-sm-6">
+                        <span class="ui-float-label">
+                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_gst + ' %'"
+                            pTooltip="Enter GST percentage" tooltipEvent="focus" tooltipPosition="bottom"> 
+                            <!-- <label for="float-input">{{product.product_gst}} %</label> -->
+                        </span>
+                    </div>
+                </div>
+                <div class="ui-g-12 ui-md-1">
+                    <button pButton type="button" label="Edit" icon="fa-edit" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-secondary"></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-dataView>

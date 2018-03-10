@@ -8,6 +8,10 @@ import { ProductEntryComponent } from './components/product-entry/product-entry.
 import { ProductInfoService } from './services/product-info.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TabViewModule } from 'primeng/tabview';
+import { DataViewModule } from 'primeng/dataview';
+import { ButtonModule } from 'primeng/button';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {TooltipModule} from 'primeng/tooltip';
 
 
 @NgModule({
@@ -19,7 +23,11 @@ import { TabViewModule } from 'primeng/tabview';
   imports: [
     BrowserModule,
     HttpClientModule,
-    TabViewModule
+    TabViewModule,
+    DataViewModule,
+    ButtonModule,
+    KeyFilterModule,
+    TooltipModule
   ],
   providers: [ProductInfoService],
   bootstrap: [AppComponent]
