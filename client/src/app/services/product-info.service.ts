@@ -23,11 +23,4 @@ export class ProductInfoService {
   getProductByCode(){
     return this.http.get<Product>(this.get_product_by_code);
   }
-  // addProduct(product){
-  //   return this.http.post<Product>(this.post_product, product, {header: })
-  // }
-  // editProduct(product){
-  //   return this.http.post<Product>(this.edit_product, product, {header: })
-  // }
-
 }

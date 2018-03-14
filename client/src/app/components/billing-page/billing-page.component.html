@@ -1,3 +1,36 @@
-<p>
-  billing-page works!
-</p>
+<p-menubar [model]="" [autoDisplay]="false">
+    <div>
+        <input class="ui-helper-clearfix search" type="search" pInputText placeholder="Search by product code or name..." 
+        (keyup)="searchEventHandle()" (keypress)="($event.key === 13) ? pressedEnter():0"
+        (click)="appearDropdown()" style="float: left" [(ngModel)]="search_key">
+        <button pButton label="Clear list" icon="fa-eraser" iconPos="right" (click)="resetList()"></button>
+    </div>
+</p-menubar>
+<div style="text-align: center">
+    <div class="dropdown">
+        <div id="myDropdown" class="dropdown-content">
+            <a *ngFor="let product of product_list" [id]="product.product_code" class="show" (click)="selectElement(product)">
+                {{product.product_code}} - {{product.product_name}}
+            </a>
+        </div>
+    </div>
+</div>
+
+<ul class="unordered-list">
+    <li *ngFor="let product of selected_product">
+        <span class="ui-float-label">
+            <span>{{product.product_code}} - {{product.product_name}}</span>    
+            <input id="float-input" type="text" size="6" pInputText placeholder="0" [(ngModel)]="product.quantity">
+        </span>
+    </li>
+</ul>
+
+
+<p-header>
+  <div class="ui-helper-clearfix" style="text-align: right">
+    <button pButton type="button" label="Calculate Total" (click)="calculateTotal()"
+    cornerStyleClass="ui-corner-top" class="ui-button-primary"></button>
+    <button pButton type="button" [label]="'Checkout: Rs. '+ gross_price" 
+    icon="fa-external-link" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-success"></button>
+  </div>
+</p-header>   

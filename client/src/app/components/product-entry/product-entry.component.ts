@@ -8,8 +8,10 @@ import { Product } from '../../models/product';
   styleUrls: ['./product-entry.component.css']
 })
 export class ProductEntryComponent implements OnInit {
+  
   product_list: Product[];
   reg_exp_gst: RegExp = /^100(\.0{0,2}?)?$|^\d{0,2}(\.\d{0,2})?$/;
+
   constructor(private product_service: ProductInfoService) { }
 
   ngOnInit() {

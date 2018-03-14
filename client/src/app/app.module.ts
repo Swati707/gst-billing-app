@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-
 import { AppComponent } from './app.component';
 import { BillingPageComponent } from './components/billing-page/billing-page.component';
 import { ProductEntryComponent } from './components/product-entry/product-entry.component';
@@ -12,7 +10,12 @@ import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {TooltipModule} from 'primeng/tooltip';
+import {OrderListModule} from 'primeng/orderlist';
+import {MenubarModule} from 'primeng/menubar';
+import {MenuItem} from 'primeng/api';
+import { FormsModule } from '@angular/forms';
 
+// import { NgModel } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,12 @@ import {TooltipModule} from 'primeng/tooltip';
     DataViewModule,
     ButtonModule,
     KeyFilterModule,
-    TooltipModule
+    TooltipModule,
+    OrderListModule,
+    MenubarModule,
+    FormsModule
+    // NgModel,
+    // ElementRef
   ],
   providers: [ProductInfoService],
   bootstrap: [AppComponent]
