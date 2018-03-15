@@ -7,7 +7,7 @@
                         <span class="ui-inputgroup-addon"><i class="fa fa-product-hunt"></i></span>
                         <input type="text" pInputText placeholder="Product Code" pKeyFilter="alphanum"
                         pTooltip="Enter Product Code" tooltipEvent="focus" style="margin-left:.5em"
-                        tooltipPosition="bottom">         
+                        tooltipPosition="bottom" [(ngModel)]="new_product.product_code">         
                     </div>                
                 </div>
                 <div class="ui-g-3 ui-md-3">
@@ -15,7 +15,7 @@
                         <span class="ui-inputgroup-addon"><i class="fa fa-user"></i></span>
                         <input type="text" pInputText placeholder="Name"
                         pTooltip="Enter Product Name" tooltipEvent="focus" style="margin-left:.5em"
-                        tooltipPosition="bottom">         
+                        tooltipPosition="bottom" [(ngModel)]="new_product.product_name">         
                     </div>
                 </div>
                 <div class="ui-g-3 ui-md-3">
@@ -23,7 +23,7 @@
                         <span class="ui-inputgroup-addon">Rs.</span>
                         <input type="text" pInputText placeholder="Price" pKeyFilter="pint"
                         pTooltip="Enter Price" tooltipEvent="focus" style="margin-left:.5em"
-                        tooltipPosition="bottom">   
+                        tooltipPosition="bottom" [(ngModel)]="new_product.product_price">   
                         <span class="ui-inputgroup-addon">.00</span>      
                     </div>                
                 </div>
@@ -32,13 +32,14 @@
                         <span class="ui-inputgroup-addon">GST</span>
                         <input type="text" pInputText placeholder="GST" [pKeyFilter]="reg_exp_gst"
                         pTooltip="Enter GST percentage" tooltipEvent="focus" style="margin-left:.5em"
-                        tooltipPosition="bottom">   
+                        tooltipPosition="bottom" [(ngModel)]="new_product.product_gst">   
                         <span class="ui-inputgroup-addon">%</span>  
                     </div> 
                 </div>
             </div>
             <div style="text-align: center">
-                <button pButton type="button" label="Add New Product" icon="fa-plus" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-success"></button>
+                <button pButton type="button" label="Add New Product" icon="fa-plus" iconPos="right" (click)="addProduct()"
+                cornerStyleClass="ui-corner-top" class="ui-button-success"></button>
             </div>
         </div>
     </p-header>
@@ -52,8 +53,7 @@
                     <div class="ui-g-2 ui-sm-6">Product code: </div>
                     <div class="ui-g-10 ui-sm-6">
                         <span class="ui-float-label">
-                            <input id="float-input" type="text" size="30" pInputText disabled="true"> 
-                            <label for="float-input">{{product.product_code}}</label>
+                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_code"> 
                         </span>
                     </div>
                     
@@ -68,21 +68,25 @@
                     <div class="ui-g-2 ui-sm-6">Price: </div>
                     <div class="ui-g-10 ui-sm-6">
                         <span class="ui-float-label">
-                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_price"
-                            pTooltip="Enter Product Price" tooltipEvent="focus" tooltipPosition="bottom"> 
+                            <input [id]="'Price_'+product.product_code" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_price"
+                            pKeyFilter="pint" pTooltip="Enter Product Price" tooltipEvent="focus" tooltipPosition="bottom" [(ngModel)]="edit_product.product_price"> 
                         </span>
                     </div>
                     
                     <div class="ui-g-2 ui-sm-6">GST: </div>
                     <div class="ui-g-10 ui-sm-6">
                         <span class="ui-float-label">
-                            <input id="float-input" type="text" size="30" pInputText disabled="true" [placeholder]="product.product_gst + ' %'"
-                            pTooltip="Enter GST percentage" tooltipEvent="focus" tooltipPosition="bottom"> 
+                            <input [id]="'GST_'+product.product_code" type="text" size="30" pInputText disabled="true" 
+                            [placeholder]="product.product_gst + '%'" [pKeyFilter]="reg_exp_gst" 
+                            pTooltip="Enter GST percentage" tooltipEvent="focus" tooltipPosition="bottom" [(ngModel)]="edit_product.product_gst"> 
                         </span>
                     </div>
                 </div>
                 <div class="ui-g-12 ui-md-1">
-                    <button pButton type="button" label="Edit" icon="fa-edit" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-secondary"></button>
+                    <button pButton type="button" label="Edit" icon="fa-edit" iconPos="right" (click)="editMode(product.product_code)" 
+                    [disabled]="!edit_mode" cornerStyleClass="ui-corner-top" class="ui-button-secondary"></button>
+                    <button pButton type="button" label="Save" (click)="saveProduct(product.product_code)" [disabled]="edit_mode"
+                    cornerStyleClass="ui-corner-top" class="ui-button-secondary"></button>
                 </div>
             </div>
         </div>

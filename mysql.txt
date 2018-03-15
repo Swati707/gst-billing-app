@@ -1,0 +1,9 @@
+CREATE TABLE `product_details` (
+ `product_code` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
+ `product_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+ `product_price` int(11) NOT NULL,
+ `product_gst` decimal(10,0) NOT NULL,
+ PRIMARY KEY (`product_code`),
+ UNIQUE KEY `product_name` (`product_name`),
+ UNIQUE KEY `product_code` (`product_code`)
+)

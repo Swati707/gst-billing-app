@@ -13,6 +13,8 @@ exports.register = function(server, options, next) {
             res("Routes working!");
         }
     })
+
+    //Route to get product by code
     server.route({
         method: "GET",
         path: "/code/{product_code}",
@@ -37,6 +39,8 @@ exports.register = function(server, options, next) {
             }
         }
     });
+
+    //route to get product by name
     server.route({
         method: "GET",
         path: "/name/{product_name}",
@@ -61,6 +65,8 @@ exports.register = function(server, options, next) {
             }
         }
     });
+
+    //route to get all products
     server.route({
         method: "GET",
         path: "/products",
@@ -78,6 +84,8 @@ exports.register = function(server, options, next) {
                 });
         }
     });
+
+    //route to add new product
     server.route({
         method: "POST",
         path: "/product",
@@ -108,6 +116,8 @@ exports.register = function(server, options, next) {
             }
         }
     });
+
+    //route to edit a product
     server.route({
         method: "POST",
         path: "/edit/{product_code}",

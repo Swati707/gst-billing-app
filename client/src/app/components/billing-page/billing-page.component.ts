@@ -17,6 +17,7 @@ export class BillingPageComponent implements OnInit {
   selected_product: any[] = [];
   search_key: string;
   gross_price = 0.0;
+  gross_gst = 0;
 
   constructor(private product_service: ProductInfoService, private _eref: ElementRef) { }
 
@@ -30,7 +31,7 @@ export class BillingPageComponent implements OnInit {
     });
   }
 
-  searchEventHandle(event){
+  searchEventHandle(){
     var list_elements;
     list_elements = document.getElementById("myDropdown").children;
     for(let element of list_elements){
@@ -57,14 +58,13 @@ export class BillingPageComponent implements OnInit {
       let p = product;
       p.quantity = null;
       this.selected_product.push(p);
-      console.log(p);
     }
   }
 
   calculateTotal(){
     for(let item of this.selected_product){
-      this.gross_price += item.quantity * item.product_price;
-      console.log(item.quantity + "*" + item.product_price)
+      this.gross_gst += (item.quantity * item.product_price) * (item.product_gst/100)
+      this.gross_price += item.quantity * item.product_price + this.gross_gst ;
     }
   }
 

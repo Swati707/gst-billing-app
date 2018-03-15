@@ -34,7 +34,7 @@
     display: block;
     border-style: outset;
     border-width: 7px;
-    border-color: rgb(210, 241, 168); 
+    border-color: #dcf4a8; 
 }
 
 .dropdown a:hover {background-color: #ddd}

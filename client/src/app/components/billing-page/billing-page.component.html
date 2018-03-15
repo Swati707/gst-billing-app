@@ -19,8 +19,10 @@
 <ul class="unordered-list">
     <li *ngFor="let product of selected_product">
         <span class="ui-float-label">
-            <span>{{product.product_code}} - {{product.product_name}}</span>    
-            <input id="float-input" type="text" size="6" pInputText placeholder="0" [(ngModel)]="product.quantity">
+            <span>{{product.product_code}} - {{product.product_name}}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity:&nbsp;    
+            <input id="float-input" type="text" size="6" pInputText placeholder="0" 
+            [(ngModel)]="product.quantity" pKeyFilter="pint">
         </span>
     </li>
 </ul>
@@ -30,7 +32,7 @@
   <div class="ui-helper-clearfix" style="text-align: right">
     <button pButton type="button" label="Calculate Total" (click)="calculateTotal()"
     cornerStyleClass="ui-corner-top" class="ui-button-primary"></button>
-    <button pButton type="button" [label]="'Checkout: Rs. '+ gross_price" 
+    <button pButton type="button" [label]="'Checkout: Rs. '+ gross_price + ' GST: ' + gross_gst" 
     icon="fa-external-link" iconPos="right" cornerStyleClass="ui-corner-top" class="ui-button-success"></button>
   </div>
 </p-header>   
