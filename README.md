@@ -30,7 +30,7 @@ To the run the backend server locally:
 
 - Navigate to the Backend directory in terminal.
 - `npm install` to install all required dependencies
-- run `node index` to start your server, .
+- run `node app` to start your server, .
 
 ### Frontend
 
